@@ -29,6 +29,9 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
+      
+      <!-- Start Display Result -->
+      <div id="resultDisplay"></div>
 
     </div>
   </div>
@@ -46,18 +49,28 @@ $(document).ready(function(){
                 'dataType':'json',
                 'cache':'false'
             }).done(function(data){
-               var id = data.id;
-               var username = data.username;
-               var photo = data.photo;
-               // if the data is array
-               var idArray = [];
-               var usernameArray = [];
-               var photoArray = [];
-               var length = data.length;
-               for (var i =0; i<length; i++){
-                   // 这里遍历数据插入
-                   /*var img=$("<img />").attr('src', photo);
-                   $("#showImg").append(img);*/
+//                var id = data.id;
+//                var username = data.username;
+//                var photo = data.photo;
+//                // if the data is array
+//                var idArray = [];
+//                var usernameArray = [];
+//                var photoArray = [];
+//                var length = data.length;
+//                for (var i =0; i<length; i++){
+//                    // 这里遍历数据插入
+//                    /*var img=$("<img />").attr('src', photo);
+//                    $("#showImg").append(img);*/
+              
+                  // result variable to hold final result.
+                  var result = "";
+                  // make final result string to display.
+                  data.foreach(function(eachItem){
+                    result += "<img src=" + eachItem.photo + ">" + "</img> <br />";
+                  });
+                  
+                  // append result variable to div by id name is resultDisplay.
+                  $("#resultDisplay").append(result);
                }     
             });
         });
