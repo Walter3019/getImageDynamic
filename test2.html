@@ -3,8 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -16,7 +15,7 @@
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -25,38 +24,45 @@
         </div>
         <div class="modal-body">
           <div id="imageShow"></div>
-          <!-- <img src=""></img>
-          <img src=""></img>
-          <img src=""></img> -->
-
-
-<!-- how to get the picture by dynamic??? Thanks -->
-
-
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
     $("#myBtn").click(function(){
         $("#myModal").modal("show");
-    });
         $("#myModal").on('shown.bs.modal', function () {
-            $.get("getServer.php",function(data){
-                	alert(data);
-
+            $.ajax({
+                'url':'getServer.php',
+                'type':'GET',
+                'dataType':'json',
+                'cache':'false'
+            }).done(function(data){
+               var id = data.id;
+               var username = data.username;
+               var photo = data.photo;
+               // if the data is array
+               var idArray = [];
+               var usernameArray = [];
+               var photoArray = [];
+               var length = data.length;
+               for (var i =0; i<length; i++){
+                   // 这里遍历数据插入
+                   /*var img=$("<img />").attr('src', photo);
+                   $("#showImg").append(img);*/
+               }     
+            });
         });
     });
 });
 </script>
-
 </body>
 </html>
